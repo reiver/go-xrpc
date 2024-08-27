@@ -1,0 +1,10 @@
+github.com/reiver/go-arbitrary v0.0.0-20240826225338-5b0908e84236 h1:SrN7tcfD1YQfKRIDxO+Gs5Zc5wttbLl7tUq85DK0ST4=
+github.com/reiver/go-arbitrary v0.0.0-20240826225338-5b0908e84236/go.mod h1:g1+Kow7vEx5zz1NxFUe5QZMJlMZMStzNbMoZ4J3C3oY=
+github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f h1:D1QSxKHm8U73XhjsW3SFLkT0zT5pKJi+1KGboMhY1Rk=
+github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f/go.mod h1:F0HbBf+Ak2ZlE8YkDW4Y+KxaUmT0KaaIJK6CXY3cJxE=
+github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc h1:mNFBGeNf9548+jBdaznubw4oyDC9hJOFTDajP72152Y=
+github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc/go.mod h1:J55rONfn+39379roH0KxMCGv6w9ifhZIoSKaVswRUDk=
+github.com/reiver/go-nsid v0.0.0-20240827010024-502157631805 h1:n99Q6VH4QILtBkjhizZqpFM6pYAWNQOql7w2i8be7XU=
+github.com/reiver/go-nsid v0.0.0-20240827010024-502157631805/go.mod h1:SKdoFsRm1U68egJyiogBIvirYGhXPqC6BsWDZ7k4tmw=
+github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4 h1:+jwuqCDWORvXNDTMa9DQ5dEd9u/jOpj4XqGVG/B5E1w=
+github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4/go.mod h1:WH8mfjs3Mpv2+U7cDIuQieN9opUoD4AuwPqn8M8EtKA=
