@@ -11,7 +11,7 @@ import (
 //
 // For example:
 //
-//	xrpc://public.api.bsky.app/app.bsky.actor.getProfile
+//	xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social
 //
 //	xrpc://example.com/com.example.fooBar
 //
@@ -20,20 +20,23 @@ type URL struct {
 	Unencrypted bool
 	Host string
 	NSID string
+	Query string
 }
 
-func ConstructURL(host string, nsid string) URL {
+func ConstructURL(host string, nsid string, query string) URL {
 	return URL{
 		Host:host,
 		NSID:nsid,
+		Query:query,
 	}
 }
 
-func ConstructUnencryptedURL(host string, nsid string) URL {
+func ConstructUnencryptedURL(host string, nsid string, query string) URL {
 	return URL{
 		Unencrypted:true,
 		Host:host,
 		NSID:nsid,
+		Query:query,
 	}
 }
 
@@ -55,9 +58,9 @@ func ParseURL(url string) (URL, error) {
 
 	switch urloc.Scheme {
 	case Scheme:
-		return ConstructURL(urloc.Host, nsid), nil
+		return ConstructURL(urloc.Host, nsid, urloc.RawQuery), nil
 	case SchemeUnencrypted:
-		return ConstructUnencryptedURL(urloc.Host, nsid), nil
+		return ConstructUnencryptedURL(urloc.Host, nsid, urloc.RawQuery), nil
 	default:
 		return empty, erorr.Errorf("xrpc: expected scheme to be %q or %q but was %q", Scheme, SchemeUnencrypted, urloc.Scheme)
 	}
@@ -92,6 +95,11 @@ func (receiver URL) Resolve() (string, error) {
 	p = append(p, "/xrpc/"...)
 	p = append(p, receiver.NSID...)
 
+	if "" != receiver.Query {
+		p = append(p, '?')
+		p = append(p, receiver.Query...)
+	}
+
 	return string(p), nil
 }
 
@@ -110,6 +118,11 @@ func (receiver URL) String() string {
 	p = append(p, receiver.Host...)
 	p = append(p, '/')
 	p = append(p, receiver.NSID...)
+
+	if "" != receiver.Query {
+		p = append(p, '?')
+		p = append(p, receiver.Query...)
+	}
 
 	return string(p)
 }

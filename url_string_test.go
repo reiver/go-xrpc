@@ -45,6 +45,26 @@ func TestURLString(t *testing.T) {
 			},
 			Expected: "xrpc-unencrypted://public.api.bsky.app/app.bsky.actor.getProfile",
 		},
+
+
+
+		{
+			URL: xrpc.URL{
+				Host:     "public.api.bsky.app",
+				NSID:                        "app.bsky.actor.getProfile",
+				Query:                                                 "actor=reiver.bsky.social",
+			},
+			Expected: "xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social",
+		},
+		{
+			URL: xrpc.URL{
+				Unencrypted: true,
+				Host:                "public.api.bsky.app",
+				NSID:                                    "app.bsky.actor.getProfile",
+				Query:                                                             "actor=reiver.bsky.social",
+			},
+			Expected: "xrpc-unencrypted://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social",
+		},
 	}
 
 	for testNumber, test := range tests {

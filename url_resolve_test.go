@@ -45,6 +45,26 @@ func TestURLResolve(t *testing.T) {
 			},
 			Expected: "http://public.api.bsky.app/xrpc/app.bsky.actor.getProfile",
 		},
+
+
+
+		{
+			URL: xrpc.URL{
+				Host:     "public.api.bsky.app",
+				NSID:                              "app.bsky.actor.getProfile",
+				Query:                                                       "actor=reiver.bsky.social",
+			},
+			Expected: "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=reiver.bsky.social",
+		},
+		{
+			URL: xrpc.URL{
+				Unencrypted: true,
+				Host:    "public.api.bsky.app",
+				NSID:                             "app.bsky.actor.getProfile",
+				Query:                                                      "actor=reiver.bsky.social",
+			},
+			Expected: "http://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=reiver.bsky.social",
+		},
 	}
 
 	for testNumber, test := range tests {
