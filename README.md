@@ -2,6 +2,12 @@
 
 Package **xrpc** provides an implementation of **BlueSky**'s **AT-Protocol**'s XRPC, for the Go programming language.
 
+This package also introduces a `xrpc` and `xrpc-unencrypted` URLs.
+For example:
+
+* `xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social`
+* `xrpc-unencrypted://localhost/app.bsky.actor.getProfile?actor=reiver.bsky.social`
+
 ## Documention
 
 Online documentation, which includes examples, can be found at: http://godoc.org/github.com/reiver/go-xrpc
