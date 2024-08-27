@@ -28,7 +28,7 @@ func Query(dst any, url string) error {
 		return err
 	}
 
-	httpURL, err := xrpcURL.Resolve()
+	httpURL, err := xrpcURL.Resolve(RequestTypeQuery)
 	if nil != err {
 		return err
 	}

@@ -76,7 +76,20 @@ func ParseURL(url string) (URL, error) {
 //	"xrpc://example.com/com.example.fooBar" -> "https://example.com/xrpc/com.example.fooBar"
 //
 //	"xrpc-unencrypted://example.com/com.example.fooBar" -> "http://example.com/xrpc/com.example.fooBar"
-func (receiver URL) Resolve() (string, error) {
+func (receiver URL) Resolve(requestType string) (string, error) {
+	switch requestType {
+	case RequestTypeProcedure:
+		return receiver.resolveWeb()
+	case RequestTypeQuery:
+		return receiver.resolveWeb()
+	case RequestTypeSubscribe:
+		return receiver.resolveWebSocket()
+	default:
+		return "", erorr.Errorf("xrpc: do not know how to resolve a %q XRPC request", requestType)
+	}
+}
+
+func (receiver URL) resolveWeb() (string, error) {
 	if err := receiver.Validate(); nil != err {
 		return "", err
 	}
@@ -101,6 +114,18 @@ func (receiver URL) Resolve() (string, error) {
 	}
 
 	return string(p), nil
+}
+
+
+func (receiver URL) resolveWebSocket() (string, error) {
+	url, err := receiver.resolveWeb()
+	if nil != err {
+		return "", err
+	}
+
+	url = "ws" + url[len("http"):]
+
+	return url, nil
 }
 
 // String returns the (serialized) XRPC URL.
