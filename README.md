@@ -8,6 +8,22 @@ Online documentation, which includes examples, can be found at: http://godoc.org
 
 [![GoDoc](https://godoc.org/github.com/reiver/go-xrpc?status.svg)](https://godoc.org/github.com/reiver/go-xrpc)
 
+## Example
+
+Here is an example of making a 'query' XRPC request:
+
+```golang
+import "github.com/reiver/go-xrpc"
+
+// ...
+
+var response map[string]any = map[string]any{}
+
+url := "xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social"
+
+err := xrpc.Query(&response, url)
+```
+
 ## Import
 
 To import package **xrpc** use `import` code like the follownig:
