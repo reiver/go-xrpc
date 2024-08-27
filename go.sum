@@ -1,3 +1,5 @@
+github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=
+github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/reiver/go-arbitrary v0.0.0-20240826225338-5b0908e84236 h1:SrN7tcfD1YQfKRIDxO+Gs5Zc5wttbLl7tUq85DK0ST4=
 github.com/reiver/go-arbitrary v0.0.0-20240826225338-5b0908e84236/go.mod h1:g1+Kow7vEx5zz1NxFUe5QZMJlMZMStzNbMoZ4J3C3oY=
 github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f h1:D1QSxKHm8U73XhjsW3SFLkT0zT5pKJi+1KGboMhY1Rk=

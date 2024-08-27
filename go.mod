@@ -8,3 +8,5 @@ require (
 )
 
 require github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc
+
+require github.com/gorilla/websocket v1.5.3
