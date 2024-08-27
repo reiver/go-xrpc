@@ -64,6 +64,15 @@ func ParseURL(url string) (URL, error) {
 
 }
 
+// Resolve turns an XRPC URL into an HTTP URL.
+//
+// For example:
+//
+//	"xrpc://public.api.bsky.app/app.bsky.actor.getProfile" -> "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile"
+//
+//	"xrpc://example.com/com.example.fooBar" -> "https://example.com/xrpc/com.example.fooBar"
+//
+//	"xrpc-unencrypted://example.com/com.example.fooBar" -> "http://example.com/xrpc/com.example.fooBar"
 func (receiver URL) Resolve() (string, error) {
 	if err := receiver.Validate(); nil != err {
 		return "", err
@@ -86,6 +95,7 @@ func (receiver URL) Resolve() (string, error) {
 	return string(p), nil
 }
 
+// String returns the (serialized) XRPC URL.
 func (receiver URL) String() string {
 	var buffer [256]byte
 	var p []byte = buffer[0:0]
