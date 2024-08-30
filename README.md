@@ -1,8 +1,38 @@
 # go-xrpc
 
-Package **xrpc** provides an implementation of **BlueSky**'s **AT-Protocol**'s XRPC, for the Go programming language.
+Package **xrpc** provides an implementation of the **XRPC** protocol used by **BlueSky** and its **AT-Protocol**, for the Go programming language.
 
-This package also introduces a `xrpc` and `xrpc-unencrypted` URLs.
+XRPC is a client-server protocol.
+This package implements both the client-side and the server-side of the protocol.
+
+XRPC has 3 requests types:
+
+* `executve` (called `procedure` in the XRPC documentation),
+* `query`, and
+* `subscribe`.
+
+This package provides functions for making each of these requests:
+
+* `xrpc.Execute()`
+* `xrpc.Query()`
+* `xrpc.Subscribe()`
+
+(See _examples_ to see how to use each.)
+
+An XRPC 'url' needs to be passed to each of these functions.
+For example:
+
+```golang
+const url string = "xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social"
+
+err := xrpc.Query(dst, url)
+```
+
+This (introduces and) supports 2 types of XRPC URLs:
+
+* `xrpc`, and
+* `xrpc-unencrypted`.
+
 For example:
 
 * `xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social`
