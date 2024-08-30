@@ -15,7 +15,7 @@ import (
 //
 //	var response map[string]any = map[string]any{}
 //	
-//	url = ""xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social"
+//	url := "xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social"
 //	
 //	err := xrpc.Query(&response, url)
 func Query(dst any, url string) error {
