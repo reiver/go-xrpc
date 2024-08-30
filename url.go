@@ -78,7 +78,7 @@ func ParseURL(url string) (URL, error) {
 //	"xrpc-unencrypted://example.com/com.example.fooBar" -> "http://example.com/xrpc/com.example.fooBar"
 func (receiver URL) Resolve(requestType string) (string, error) {
 	switch requestType {
-	case RequestTypeProcedure:
+	case RequstTypeExecute, RequestTypeProcedure:
 		return receiver.resolveWeb()
 	case RequestTypeQuery:
 		return receiver.resolveWeb()
