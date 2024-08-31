@@ -23,6 +23,9 @@ type URL struct {
 	Query string
 }
 
+// ConstructURL constructs an XRPC URL (i.e., "xrpc://...") from a 'host', an 'nsid', and a 'query'.
+//
+// The 'query' can be an empty string.
 func ConstructURL(host string, nsid string, query string) URL {
 	return URL{
 		Host:host,
@@ -31,6 +34,9 @@ func ConstructURL(host string, nsid string, query string) URL {
 	}
 }
 
+// ConstructURL constructs an XRPC URL (i.e., "xrpc-unencrypted://...") from a 'host', an 'nsid', and a 'query'.
+//
+// The 'query' can be an empty string.
 func ConstructUnencryptedURL(host string, nsid string, query string) URL {
 	return URL{
 		Unencrypted:true,
@@ -38,6 +44,16 @@ func ConstructUnencryptedURL(host string, nsid string, query string) URL {
 		NSID:nsid,
 		Query:query,
 	}
+}
+
+// MustParseURL is similar to [ParseURL] except that it panic()s if there is an error (rather than returning it, like how [ParseURL] does).
+func MustParseURL(url string) URL {
+	xrpcurl, err := ParseURL(url)
+	if nil != err {
+		panic(err)
+	}
+
+	return xrpcurl
 }
 
 func ParseURL(url string) (URL, error) {
@@ -65,6 +81,16 @@ func ParseURL(url string) (URL, error) {
 		return empty, erorr.Errorf("xrpc: expected scheme to be %q or %q but was %q", Scheme, SchemeUnencrypted, urloc.Scheme)
 	}
 
+}
+
+// MustResolve is similar to [Resolve] except that it panic()s if there is an error (rather than returning it, like how [Resolve] does).
+func (receiver URL) MustResolve(requestType string) string {
+	httpurl, err := receiver.Resolve(requestType)
+	if nil != err {
+		panic(err)
+	}
+
+	return httpurl
 }
 
 // Resolve turns an XRPC URL into an HTTP URL.
@@ -152,6 +178,7 @@ func (receiver URL) String() string {
 	return string(p)
 }
 
+// Validate returns an error if the URL is invalid.
 func (receiver URL) Validate() error {
 	if "" == receiver.Host {
 		return errEmptyHost
