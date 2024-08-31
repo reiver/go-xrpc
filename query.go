@@ -10,9 +10,9 @@ import (
 	"github.com/reiver/go-errhttp"
 )
 
-// Query makes a 'query' XRPC request for the provided XRPC URL in 'url', putting the results into 'dst'.
+// Query makes a 'query' XRPC request to the provided URL (passed in 'url'), putting the results into 'dst'.
 //
-// You can pass Query `http2`, `http`, `xrpc`, and `xrpc-unencrypted` URLs.
+// You can provide Query with an `https`, `http`, `xrpc`, or `xrpc-unencrypted` URL.
 //
 // Here is an example usage of calling Query with an `xrpc` URL:
 //
