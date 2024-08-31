@@ -38,7 +38,7 @@ func Query(dst any, url string) error {
 	}
 	defer bodyReadCloser.Close()
 
-	err = unmarshal(dst, bodyReadCloser)
+	err = unmarshalJSON(dst, bodyReadCloser)
 	if nil != err {
 		return err
 	}

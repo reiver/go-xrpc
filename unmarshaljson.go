@@ -6,7 +6,7 @@ import (
 	"io"
 )
 
-func unmarshal(dst any, reader io.Reader) error {
+func unmarshalJSON(dst any, reader io.Reader) error {
 	if nil == reader {
 		return errNilReader
 	}
