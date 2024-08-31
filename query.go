@@ -1,8 +1,6 @@
 package xrpc
 
 import (
-	"bytes"
-	"encoding/json"
 	"io"
 	"net/http"
 
@@ -53,25 +51,9 @@ func Query(dst any, url string) error {
 	}
 	defer bodyReadCloser.Close()
 
-	var bodyBuffer bytes.Buffer
-	io.Copy(&bodyBuffer, bodyReadCloser)
-
-	var body []byte = bodyBuffer.Bytes()
-
-	switch casted := dst.(type) {
-	case json.Unmarshaler:
-		return json.Unmarshal(body, casted)
-	case *string:
-		*casted = string(body)
-		return nil
-	case *[]byte:
-		*casted = body
-		return nil
-	case *[]rune:
-		*casted = []rune(string(body))
-		return nil
-	default:
-		return json.Unmarshal(body, dst)
+	err = unmarshal(dst, bodyReadCloser)
+	if nil != err {
+		return err
 	}
 
 	return nil

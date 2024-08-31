@@ -10,6 +10,7 @@ const (
 	errNilDestination         = erorr.Error("xrpc: nil destination")
 	errNilHTTPResponse        = erorr.Error("xrpc: nil http-response")
 	errNilHTTPResponseBody    = erorr.Error("xrpc: nil http-response body")
+	errNilReader              = erorr.Error("xrpc: nil reader")
 	errNilReceiver            = erorr.Error("xrpc: nil receiver")
 	errNilURL                 = erorr.Error("xrpc: nil url")
 	errNilWebSocketConnection = erorr.Error("xrpc: nil websocket connection")
