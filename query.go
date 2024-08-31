@@ -12,11 +12,21 @@ import (
 
 // Query makes a 'query' XRPC request for the provided XRPC URL in 'url', putting the results into 'dst'.
 //
-// Example usage:
+// You can pass Query `http2`, `http`, `xrpc`, and `xrpc-unencrypted` URLs.
+//
+// Here is an example usage of calling Query with an `xrpc` URL:
 //
 //	var response map[string]any = map[string]any{}
 //	
 //	url := "xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.social"
+//	
+//	err := xrpc.Query(&response, url)
+//
+// Here is an example usage of calling Query with an `https` URL:
+//
+//	var response map[string]any = map[string]any{}
+//	
+//	url := "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=reiver.bsky.social"
 //	
 //	err := xrpc.Query(&response, url)
 func Query(dst any, url string) error {
