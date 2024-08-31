@@ -32,17 +32,12 @@ func Query(dst any, url string) error {
 		return errNilDestination
 	}
 
-	xrpcURL, err := ParseURL(url)
+	httpurl, err := httpURL(url)
 	if nil != err {
 		return err
 	}
 
-	httpURL, err := xrpcURL.Resolve(RequestTypeQuery)
-	if nil != err {
-		return err
-	}
-
-	bodyReadCloser, err := query(httpURL)
+	bodyReadCloser, err := query(httpurl)
 	if nil != err {
 		return err
 	}
