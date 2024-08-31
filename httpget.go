@@ -22,7 +22,14 @@ func httpGET(httpURL string) (io.ReadCloser, error) {
 	{
 		err := setUserAgent(req, useragent)
 		if nil != err {
-			return nil, erorr.Errorf("xrpc: problem setting \"User-Agent\" in HTTP GET request: %w", err)
+			return nil, erorr.Errorf("xrpc: problem setting \"User-Agent\" header in HTTP GET request: %w", err)
+		}
+	}
+
+	{
+		err := setAccept(req, jsonContentType)
+		if nil != err {
+			return nil, erorr.Errorf("xrpc: problem setting \"Accept\" header in HTTP GET request: %w", err)
 		}
 	}
 
