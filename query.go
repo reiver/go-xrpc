@@ -65,6 +65,13 @@ func query(httpURL string) (io.ReadCloser, error) {
 		}
 	}
 
+	{
+		err := setUserAgent(req, useragent)
+		if nil != err {
+			return nil, erorr.Errorf("xrpc: problem setting \"User-Agent\" in HTTP request: %w", err)
+		}
+	}
+
 	httpResp, err := http.DefaultClient.Do(req)
 	if nil != err {
 		return nil, err
