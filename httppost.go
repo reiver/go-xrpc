@@ -8,7 +8,7 @@ import (
 	"github.com/reiver/go-errhttp"
 )
 
-func httpPOST(httpURL string, body io.ReadCloser) (io.ReadCloser, error) {
+func httpPOST(bearerToken string, httpURL string, body io.ReadCloser) (io.ReadCloser, error) {
 
 	var req *http.Request
 	{
@@ -34,6 +34,13 @@ func httpPOST(httpURL string, body io.ReadCloser) (io.ReadCloser, error) {
 		err := setContentType(req, jsonContentType)
 		if nil != err {
 			return nil, erorr.Errorf("xrpc: problem setting \"Content-Type\" header in HTTP POST request: %w", err)
+		}
+	}
+
+	if 0 < len(bearerToken) {
+		err := setAuthorizationBearer(req, bearerToken)
+		if nil != err {
+			return nil, erorr.Errorf("xrpc: problem setting \"Authorization\" header in HTTP POST request: %w", err)
 		}
 	}
 

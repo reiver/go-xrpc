@@ -8,7 +8,7 @@ import (
 	"github.com/reiver/go-errhttp"
 )
 
-func httpGET(httpURL string) (io.ReadCloser, error) {
+func httpGET(bearerToken string, httpURL string) (io.ReadCloser, error) {
 
 	var req *http.Request
 	{
@@ -23,6 +23,13 @@ func httpGET(httpURL string) (io.ReadCloser, error) {
 		err := setUserAgent(req, useragent)
 		if nil != err {
 			return nil, erorr.Errorf("xrpc: problem setting \"User-Agent\" header in HTTP GET request: %w", err)
+		}
+	}
+
+	if 0 < len(bearerToken) {
+		err := setAuthorizationBearer(req, bearerToken)
+		if nil != err {
+			return nil, erorr.Errorf("xrpc: problem setting \"Authorization\" header in HTTP GET request: %w", err)
 		}
 	}
 

@@ -20,6 +20,10 @@ package xrpc
 //	
 //	err := xrpc.Query(&response, url)
 func Query(dst any, url string) error {
+	return AuthorizedQuery(dst, "", url)
+}
+
+func AuthorizedQuery(dst any, bearerToken string, url string) error {
 	if nil == dst {
 		return errNilDestination
 	}
@@ -29,7 +33,7 @@ func Query(dst any, url string) error {
 		return err
 	}
 
-	bodyReadCloser, err := httpGET(httpurl)
+	bodyReadCloser, err := httpGET(bearerToken, httpurl)
 	if nil != err {
 		return err
 	}

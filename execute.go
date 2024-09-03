@@ -43,6 +43,10 @@ import (
 //	
 //	err := xrpc.Execute(&response, url, src)
 func Execute(dst any, url string, src any) error {
+	return AuthorizedExecute(dst, "", url, src)
+}
+
+func AuthorizedExecute(dst any, bearerToken string, url string, src any) error {
 	if nil == dst {
 		return errNilDestination
 	}
@@ -62,7 +66,7 @@ func Execute(dst any, url string, src any) error {
 		}
 	}
 
-	responseBodyReadCloser, err := httpPOST(httpurl, requestReadCloser)
+	responseBodyReadCloser, err := httpPOST(bearerToken, httpurl, requestReadCloser)
 	if nil != err {
 		return err
 	}
