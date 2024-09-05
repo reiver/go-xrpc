@@ -23,7 +23,7 @@ func (receiver *internalIterator) Close() error {
 		return nil
 	}
 
-	var conn *websocket.Conn
+	var conn *websocket.Conn = receiver.conn
 	if nil == conn {
 		return errNilWebSocketConnection
 	}
