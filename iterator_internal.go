@@ -56,11 +56,14 @@ func (receiver *internalIterator) Decode(dst any) error {
 }
 
 func (receiver *internalIterator) Err() error {
+	if nil == receiver {
+		return errNilReceiver
+	}
+
 	return receiver.err
 }
 
 func (receiver *internalIterator) Next() bool {
-
 	if nil == receiver {
 		return false
 	}
