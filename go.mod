@@ -1,6 +1,6 @@
 module github.com/reiver/go-xrpc
 
-go 1.22.4
+go 1.23.4
 
 require (
 	github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f
@@ -12,6 +12,11 @@ require github.com/reiver/go-errhttp v1.1.1-0.20240827033330-e4ea888843cc
 require (
 	github.com/gorilla/websocket v1.5.3
 	github.com/reiver/go-json v0.0.0-20240828120501-c8794288440c
+	github.com/reiver/go-xrpcuri v0.0.0-20250505132918-88c95ded44cb
 )
 
-require github.com/reiver/go-lck v0.0.0-20240808133902-b56df221c39f // indirect
+require (
+	github.com/reiver/go-lck v0.0.0-20240808133902-b56df221c39f // indirect
+	golang.org/x/net v0.39.0 // indirect
+	golang.org/x/text v0.24.0 // indirect
+)

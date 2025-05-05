@@ -17,12 +17,7 @@ import (
 //	
 //	err := xrpc.Subscribe(&response, url)
 func Subscribe(url string) (Iterator, error) {
-	xrpcURL, err := ParseURL(url)
-	if nil != err {
-		return nil, erorr.Errorf("xrpc: problem parsing XRPC URL %q: %q", url, err)
-	}
-
-	wsURL, err := xrpcURL.resolveWebSocket()
+	wsURL, err := resolve(url, requestTypeSubscribe)
 	if nil != err {
 		return nil, err
 	}

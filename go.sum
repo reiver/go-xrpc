@@ -14,3 +14,9 @@ github.com/reiver/go-nsid v0.0.0-20250428123030-befee70ebbe4 h1:fwlA2JihIUj5HcbX
 github.com/reiver/go-nsid v0.0.0-20250428123030-befee70ebbe4/go.mod h1:SKdoFsRm1U68egJyiogBIvirYGhXPqC6BsWDZ7k4tmw=
 github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4 h1:+jwuqCDWORvXNDTMa9DQ5dEd9u/jOpj4XqGVG/B5E1w=
 github.com/reiver/go-strfs v0.0.0-20240825123104-a22d8dfd04d4/go.mod h1:WH8mfjs3Mpv2+U7cDIuQieN9opUoD4AuwPqn8M8EtKA=
+github.com/reiver/go-xrpcuri v0.0.0-20250505132918-88c95ded44cb h1:i+lu1amnMJ5iA7zgBCsUV/9KhRqaJ4NCaJ8ZoX10qzE=
+github.com/reiver/go-xrpcuri v0.0.0-20250505132918-88c95ded44cb/go.mod h1:NvKb0DlRcKPIYRRNMC7iDvvspEo70cn/tyeOwYbjDFk=
+golang.org/x/net v0.39.0 h1:ZCu7HMWDxpXpaiKdhzIfaltL9Lp31x/3fCP11bc6/fY=
+golang.org/x/net v0.39.0/go.mod h1:X7NRbYVEA+ewNkCNyJ513WmMdQ3BineSwVtN2zD/d+E=
+golang.org/x/text v0.24.0 h1:dd5Bzh4yt5KYA8f9CJHCP4FB4D51c2c6JvN37xJJkJ0=
+golang.org/x/text v0.24.0/go.mod h1:L8rBsPeo2pSS+xqN0d5u2ikmjtmoJbDBT1b7nHvFCdU=

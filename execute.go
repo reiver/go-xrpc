@@ -51,7 +51,7 @@ func AuthorizedExecute(dst any, bearerToken string, url string, src any) error {
 		return errNilDestination
 	}
 
-	httpurl, err := httpURL(url)
+	httpurl, err := resolve(url, requestTypeExecute)
 	if nil != err {
 		return err
 	}

@@ -28,7 +28,7 @@ func AuthorizedQuery(dst any, bearerToken string, url string) error {
 		return errNilDestination
 	}
 
-	httpurl, err := httpURL(url)
+	httpurl, err := resolve(url, requestTypeQuery)
 	if nil != err {
 		return err
 	}
