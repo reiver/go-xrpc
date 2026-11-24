@@ -1,9 +1,11 @@
 package xrpc
 
 import (
-	"bytes"
 	"encoding/json"
 	"io"
+
+	"codeberg.org/reiver/go-erorr"
+	"codeberg.org/reiver/go-field"
 )
 
 func unmarshalJSON(dst any, reader io.Reader) error {
@@ -11,10 +13,10 @@ func unmarshalJSON(dst any, reader io.Reader) error {
 		return errNilReader
 	}
 
-	var bodyBuffer bytes.Buffer
-	io.Copy(&bodyBuffer, reader)
-
-	var body []byte = bodyBuffer.Bytes()
+	body, err := io.ReadAll(reader)
+	if nil != err {
+		return erorr.Wrap(ErrResponse, "problem reading the response body", field.Error("error", err))
+	}
 
 	switch casted := dst.(type) {
 	case json.Unmarshaler:
@@ -31,6 +33,4 @@ func unmarshalJSON(dst any, reader io.Reader) error {
 	default:
 		return json.Unmarshal(body, dst)
 	}
-
-	return nil
 }

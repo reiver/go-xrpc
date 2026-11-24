@@ -1,5 +1,9 @@
 package xrpc
 
+import (
+	"context"
+)
+
 // Query makes a 'query' XRPC request to the provided URL (passed in 'url'), putting the results into 'dst'.
 //
 // You can provide Query with an `https`, `http`, `xrpc`, or `xrpc-unencrypted` URL.
@@ -23,29 +27,9 @@ func Query(dst any, url string) error {
 	return AuthorizedQuery(dst, "", url)
 }
 
+// AuthorizedQuery is like [Query], but sends 'bearerToken' (if not "") in an "Authorization: Bearer" header.
+//
+// (For a context, other headers, or another HTTP client, see [Client].)
 func AuthorizedQuery(dst any, bearerToken string, url string) error {
-	if nil == dst {
-		return errNilDestination
-	}
-
-	httpurl, err := resolve(url, requestTypeQuery)
-	if nil != err {
-		return err
-	}
-
-	bodyReadCloser, err := httpGET(bearerToken, httpurl)
-	if nil != err {
-		return err
-	}
-	if nil == bodyReadCloser {
-		return errNilHTTPResponseBody
-	}
-	defer bodyReadCloser.Close()
-
-	err = unmarshalJSON(dst, bodyReadCloser)
-	if nil != err {
-		return err
-	}
-
-	return nil
+	return Client{}.QueryJSON(context.Background(), dst, url, bearerHeader(bearerToken))
 }

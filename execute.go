@@ -1,7 +1,7 @@
 package xrpc
 
 import (
-	"io"
+	"context"
 )
 
 // Execute makes an 'execute' XRPC request to the provided URL (passed in 'url'), putting the results into 'dst'.
@@ -46,39 +46,13 @@ func Execute(dst any, url string, src any) error {
 	return AuthorizedExecute(dst, "", url, src)
 }
 
+// AuthorizedExecute is like [Execute], but sends 'bearerToken' (if not "") in an "Authorization: Bearer" header.
+//
+// (For a context, other headers, or another HTTP client, see [Client].)
 func AuthorizedExecute(dst any, bearerToken string, url string, src any) error {
 	if nil == dst {
 		return errNilDestination
 	}
 
-	httpurl, err := resolve(url, requestTypeExecute)
-	if nil != err {
-		return err
-	}
-
-	var requestReadCloser io.ReadCloser
-	{
-		if nil != src {
-			requestReadCloser, err = marshalJSON(src)
-			if nil != err {
-				return err
-			}
-		}
-	}
-
-	responseBodyReadCloser, err := httpPOST(bearerToken, httpurl, requestReadCloser)
-	if nil != err {
-		return err
-	}
-	if nil == responseBodyReadCloser {
-		return errNilHTTPResponseBody
-	}
-	defer responseBodyReadCloser.Close()
-
-	err = unmarshalJSON(dst, responseBodyReadCloser)
-	if nil != err {
-		return err
-	}
-
-	return nil
+	return Client{}.ExecuteJSON(context.Background(), dst, url, bearerHeader(bearerToken), src)
 }

@@ -62,6 +62,45 @@ url := "xrpc://public.api.bsky.app/app.bsky.actor.getProfile?actor=reiver.bsky.s
 err := xrpc.Query(&response, url)
 ```
 
+## Client
+
+For more control — a `context.Context`, request headers, your own `*http.Client`, response headers, or a non-JSON (or streamed) response — use an `xrpc.Client`:
+
+```golang
+import "github.com/reiver/go-xrpc"
+
+// ...
+
+var client = xrpc.Client{
+	HTTPClient: httpClient,
+}
+
+var header = http.Header{}
+header.Set("Authorization", "Bearer "+accessToken)
+
+var response map[string]any
+
+err := client.QueryJSON(ctx, &response, "https://pds.example.com/xrpc/com.atproto.repo.describeRepo?repo=atproto.com", header)
+```
+
+`client.Query()` and `client.Execute()` return the `*http.Response` with its body unread (the caller must close it).
+
+## Errors
+
+When the HTTP status is not 2xx, the error is an `*xrpc.Error`, with the XRPC error's name (ex: `RepoNotFound`), its message, the HTTP status, and the response headers:
+
+```golang
+var xrpcError *xrpc.Error
+if errors.As(err, &xrpcError) {
+	switch xrpcError.Name {
+	case "RepoNotFound":
+		// ...
+	}
+}
+```
+
+(Or, more simply: `xrpc.ErrorName(err)`.)
+
 ## XRPC URL Resolution
 
 This package introduces two URL schemes:
@@ -114,7 +153,9 @@ Package **xrpc** was written by [Charles Iliya Krempeaux](http://reiver.link)
 
 ## See Also
 
+* https://github.com/reiver/go-atdid
 * https://github.com/reiver/go-athandle
+* https://github.com/reiver/go-atjwt
 * https://github.com/reiver/go-atproto
 * https://github.com/reiver/go-aturi
 * https://github.com/reiver/go-bsky

@@ -4,33 +4,13 @@ import (
 	"net/http"
 )
 
-// setAuthorizationBearer sets the HTTP "Authorization: Bearer {TOKEN}" header on an HTTP-request.
-//
-// Example usage:
-//
-//	var req *http.Request = ???
-//	
-//	// ...
-//	
-//	setAuthorizationBearer(req, "abcde12345")
-func setAuthorizationBearer(req *http.Request, value string) error {
-	if nil == req {
-		return errNilHTTPRequest
-	}
-
-	if "" == value {
+// bearerHeader returns the headers with "Authorization: Bearer {TOKEN}" — or no headers, if 'bearerToken' is "".
+func bearerHeader(bearerToken string) http.Header {
+	if "" == bearerToken {
 		return nil
 	}
 
-	var header http.Header = req.Header
-	{
-		if nil == header {
-			return errNilHTTPRequestHeader
-		}
+	return http.Header{
+		"Authorization": {"Bearer " + bearerToken},
 	}
-
-	value = "Bearer " + value
-
-	header.Add("Authorization", value)
-	return nil
 }

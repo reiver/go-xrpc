@@ -1,7 +1,13 @@
 package xrpc
 
 import (
-	"github.com/reiver/go-erorr"
+	"codeberg.org/reiver/go-erorr"
+)
+
+const (
+	ErrRequest          = erorr.Error("xrpc: request failed")
+	ErrResponse         = erorr.Error("xrpc: bad response")
+	ErrResponseTooLarge = erorr.Error("xrpc: response too large")
 )
 
 const (

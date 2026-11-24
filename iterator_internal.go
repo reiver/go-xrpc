@@ -2,7 +2,7 @@ package xrpc
 
 import (
 	"github.com/gorilla/websocket"
-	"github.com/reiver/go-erorr"
+	"codeberg.org/reiver/go-erorr"
 )
 
 type internalIterator struct {
